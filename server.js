@@ -1,17 +1,31 @@
 //HSBNE IRC Bot
 var irc = require('irc');
-var bot = new irc.Client('chat.freenode.net', 'borkbott' || 'borkbott', {
+var bot = new irc.Client('chat.freenode.net', 'HSBNEBot' || 'borkbott', {
     botName: 'botbott',
     userName: 'hsbnebot',
     channels: ['#hsbne'],
     port: 8001,
-    debug: true
+    debug: true,
+    showerrors: true
 });
 
+var YQL = require("yql");
+ 
 bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('doge') > -1
-      ) {
-        bot.say(to, 'so wow');
-        bot.say(to, 'much irc');
-    }
+    if(  message.indexOf('http') > -1 ) {
+        var regex = new RegExp(/(?:https?:\/\/)?(?:[\w]+\.)([a-zA-Z\.]{2,6})([\/\w\.-]*)*\/?/),
+            httpurl = message.match(regex);
+        //    bot.say(to, httpurl[0]);
+                // Request URL's title using YQL
+                new YQL.exec('select * from data.html.cssselect where url="' + httpurl[0].toString() + '" and css="title"', function(response) {
+                    var title = response.query.results.results.title;
+                    //Say the resulting title.
+                    bot.say(to, "Title: " + title);
+                });
+        }
+});
+
+bot.addListener("names", function (to, nicknames) {
+        //Sending a message to the channel when the bot connects
+//        bot.say(to,"Hello everyone!");
 });
