@@ -13,7 +13,7 @@ var YQL = require("yql");
  
 bot.addListener('message', function(from, to, message) {
     if(  message.indexOf('http') > -1 ) {
-        var regex = new RegExp(/(?:https?:\/\/)?(?:[\w]+\.)([a-zA-Z\.]{2,6})([\/\w\.-]*)*\/?/),
+        var regex = new RegExp(/(?:http:\/\/)?(?:[\w]+\.)([a-zA-Z\.]{2,6})([\/\w\.-]*)*\/?/),
             httpurl = message.match(regex);
         //    bot.say(to, httpurl[0]);
                 // Request URL's title using YQL
