@@ -12,17 +12,18 @@ var bot = new irc.Client('chat.freenode.net', 'HSBNEBot' || 'borkbott', {
 var YQL = require("yql");
  
 bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('http://') > -1 ) {
-            var regex = new RegExp(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/),
-                httpurl = message.match(regex);
-                
-                // Request URL's title using YQL
-                new YQL.exec('select * from data.html.cssselect where url="' + httpurl[0].toString() + '" and css="title"', function(response) {
-                    var title = response.query.results.results.title;
-                    //Say the resulting title.
-                    bot.say(to, "Title: " + title);
-                });
-        }
+    if(  message.indexOf('http') > -1 ) {
+            var regex = new RegExp(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/), httpurl = message.match(regex);
+                        // Request URL's title using YQL
+                        new YQL.exec('select * from data.html.cssselect where url="' + httpurl[0].toString() + '" and css="title"', function(response) {
+                            var title = response.query.results.results.title;
+                            //Say the resulting title.
+                            if
+                            bot.say(to, "Title: " + title);
+                        });
+    }
+        
+    if(  message.indexOf('macbeth') > -1 ) { bot.say(to, "The Scottish Play?"); }
 });
 
 bot.addListener("names", function (to, nicknames) {
