@@ -3,7 +3,7 @@ var irc = require('irc');
 var bot = new irc.Client('chat.freenode.net', 'HSBNEBot' || 'borkbott', {
     botName: 'botbott',
     userName: 'hsbnebot',
-    channels: ['#hsbnebot'],
+    channels: ['#hsbne'],
     port: 8001,
     debug: true,
     showerrors: true
