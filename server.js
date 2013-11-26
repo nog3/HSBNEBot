@@ -27,15 +27,18 @@ bot.addListener('message', function(from, to, message) {
                                                     });
                         }
     }
-        
-    if(  message.indexOf('macbeth') > -1 ) { bot.say(to, "The Scottish Play?"); } });
-
-// bot.addListener("names", function (to, nicknames) {  bot.say(to,"Hello everyone!"); });
-
-bot.addListener('error', function(message) {
-    console.log('error: ', message);
+    if(  message.indexOf('macbeth') > -1 ) {
+        bot.say(to, "The Scottish Play?"); 
+    }
+    if(  message.indexOf('weather?') > -1 ) { 
+            new YQL.exec('SELECT * FROM weather.bylocation WHERE location="Brisbane" AND unit="c"', function(response) {
+                if (response.results.weather.rss.channel.item) {
+                    var weatherduh = "Temperature: " + response.results.weather.rss.channel.item.temp + " Weather: " +  response.results.weather.rss.channel.item.text;
+                    bot.say(to, weatherduh); 
+                }
+            });
+    
+    }
 });
-
-var isEmpty = function(obj) {
-  return Object.keys(obj).length === 0;
-}
+        
+ bot.addListener('error', function(message) {bot.say('#hsbne', message);});
