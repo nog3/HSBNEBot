@@ -1,4 +1,5 @@
 //HSBNE IRC Bot
+var http = require("http")
 var irc = require('irc');
 var bot = new irc.Client('chat.freenode.net', 'HSBNEBot' || 'borkbott', {
     botName: 'botbott',
@@ -30,15 +31,13 @@ bot.addListener('message', function(from, to, message) {
     if(  message.indexOf('macbeth') > -1 ) {
         bot.say(to, "The Scottish Play?"); 
     }
-    if(  message.indexOf('weather?') > -1 ) { 
-            new YQL.exec('SELECT * FROM weather.bylocation WHERE location="Brisbane" AND unit="c"', function(response) {
-                if (response.results.weather.rss.channel.item) {
-                    var weatherduh = "Temperature: " + response.results.weather.rss.channel.item.temp + " Weather: " +  response.results.weather.rss.channel.item.text;
-                    bot.say(to, weatherduh); 
-                }
-            });
-    
-    }
 });
         
- bot.addListener('error', function(message) {bot.say('#hsbne', message);});
+bot.addListener('error', function(message) {bot.say('#hsbne', message);});
+
+http.createServer(function(request,response){  
+        response.writeHead(200, { "Content-Type": "text/plain" });
+        response.write("Hello I are IRCbot!");
+        response.end();
+}).listen(80);  
+console.log("Server Running on 80"); 
