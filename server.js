@@ -35,9 +35,11 @@ bot.addListener('message', function(from, to, message) {
         
 bot.addListener('error', function(message) {bot.say('#hsbne', message);});
 
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 http.createServer(function(request,response){  
         response.writeHead(200, { "Content-Type": "text/plain" });
         response.write("Hello I are IRCbot!");
         response.end();
-}).listen(80);  
-console.log("Server Running on 80"); 
+}).listen(port, ip);  
+console.log("Server Running on " + port); 
