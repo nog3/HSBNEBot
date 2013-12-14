@@ -28,13 +28,8 @@ bot.addListener('message', function(from, to, message) {
                                                     });
                         }
     }
-    if(  message.indexOf('macbeth') > -1 ) {
-        bot.say(to, "The Scottish Play?"); 
-    }
     if(  message.indexOf('we should') > -1 ) {
-        var start = (message.indexOf('we should') + 2),
-        weshould = (from + message.substring(start,message.length));
-        bot.say(to, weshould); 
+        bot.say(to, message.replace(/(.*?)we should/, (from + " should") ));
     }
 });
         
