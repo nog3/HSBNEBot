@@ -38,9 +38,10 @@ bot.addListener('message', function(from, to, message) {
                             
                         }
     }
-    if(  message.indexOf('we should') > -1 ) {
-        bot.say(to, message.replace(/(.*?)we should/, (from + " should") ));
+    if(  message.toLowerCase().indexOf('we should') > -1 ) {
+        bot.say(to, message.replace(/(.*?)we should/i, (from + " should") ));
     }
+
 });
         
 
